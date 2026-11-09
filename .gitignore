@@ -4,3 +4,10 @@ __pycache__/
 ref/
 *.pyc
 .pytest_cache/
+experiments/**/.venv/
+experiments/**/*.wav
+experiments/**/*.tar
+experiments/**/dev_text
+experiments/**/utt2spk
+experiments/**/ref_*.txt
+experiments/**/devp/
