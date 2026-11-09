@@ -8,6 +8,7 @@ from .rules import MAX_DAYS_AHEAD
 from .store import Order
 
 LANGUAGE_NAMES = {"en": "English", "fr": "French"}
+PRICE_EXAMPLE = {"en": "two hundred forty nine dirhams", "fr": "deux cent quarante-neuf dirhams"}
 
 
 def describe_items(order: Order) -> str:
@@ -24,7 +25,7 @@ def system_prompt(order: Order, today: date, language: str = "en") -> str:
     first_name = order.customer_name.split()[0]
     return f"""You are Sara, a friendly order-confirmation agent for an online store in Morocco.
 You are on a voice call. Speak {lang} only. Your words are turned into speech, so:
-use short, natural sentences, no lists, no emojis, no symbols. Say prices as words like "two hundred forty nine dirhams".
+use short, natural sentences, no lists, no emojis, no symbols. Say prices as words like "{PRICE_EXAMPLE.get(language, PRICE_EXAMPLE['en'])}". Use the polite "vous" form in French.
 
 The customer ordered online and pays cash on delivery. Your job is to confirm the order before it ships.
 

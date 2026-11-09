@@ -46,7 +46,7 @@ async def main(order_id: str, persona: str):
     tools = {fn.__name__: fn for fn in build_tools(store, order.id) if fn.__name__ != "end_call"}
     tool_schemas = AnthropicLLMAdapter().to_provider_tools_format(LLMContext(tools=build_tools(store, order.id)).tools)
 
-    agent_system = system_prompt(order, date.today())
+    agent_system = system_prompt(order, date.today(), os.getenv("AGENT_LANGUAGE", "en"))
     customer_system = (
         f"You are {order.customer_name}, answering a phone call about your online order {order.id} "
         f"({', '.join(i['name'] for i in order.items)}). {persona} "
