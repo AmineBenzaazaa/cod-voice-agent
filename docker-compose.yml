@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: codvoice
+      POSTGRES_PASSWORD: codvoice
+      POSTGRES_DB: codvoice
+    ports: ["55433:5432"]
+    volumes:
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - ./db/seed.sql:/docker-entrypoint-initdb.d/02-seed.sql:ro
+
+  livekit:
+    image: livekit/livekit-server:v1.13.11
+    command: --dev --bind 0.0.0.0 --node-ip 127.0.0.1   # dev keys: devkey / secret
+    ports: ["7880:7880", "7881:7881", "7882:7882/udp"]
